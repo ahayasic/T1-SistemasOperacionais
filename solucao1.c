@@ -21,7 +21,7 @@ void *sushi_bar(void *identifier)
 
     while(TRUE) {
         pthread_mutex_lock(&mutex);
-        if (comendo == 5) {
+        if(comendo == 5) {
             esperando++;
             printf("\t%d esperando!\t#Comendo: %d\t$Esperando: %d\n", *(int *) identifier, comendo, esperando);
             pthread_mutex_unlock(&mutex);

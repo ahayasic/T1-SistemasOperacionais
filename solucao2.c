@@ -11,13 +11,13 @@ int comendo, esperando, deve_esperar = 0;
 sem_t block;
 pthread_mutex_t mutex;
 
-void *sushi_bar(void *identificador){
-    
+void *sushi_bar(void *identificador)
+{
     int i, n;
 
-    while(TRUE){
+    while(TRUE) {
         pthread_mutex_lock(&mutex);
-        if (deve_esperar){
+        if(deve_esperar) {
             esperando++;
             printf("\t%d esperando!\t#Comendo: %d\t$Esperando: %d\n", *(int *) identificador, comendo, esperando);
             pthread_mutex_unlock(&mutex);
@@ -34,7 +34,7 @@ void *sushi_bar(void *identificador){
             pthread_mutex_unlock(&mutex);
 
         printf("%d comendo!\t#Comendo: %d\t$Esperando: %d\n", *(int *) identificador, comendo, esperando);
-        sleep(rand() % 5+2);
+        sleep(rand() % 5 + 2);
         
         pthread_mutex_lock(&mutex);
         comendo--;
@@ -50,15 +50,15 @@ void *sushi_bar(void *identificador){
     }
 }
 
-void main(){
-
+void main()
+{
     int i;
     int id_pessoas[NUM_PESSOAS];
 
     pthread_t pessoas[NUM_PESSOAS];
 
-    pthread_mutex_init(&mutex,NULL);
-    sem_init(&block,0,0);
+    pthread_mutex_init(&mutex, NULL);
+    sem_init(&block, 0, 0);
 
     for(i=0;i<NUM_PESSOAS;i++)
         id_pessoas[i] = i;
@@ -66,8 +66,7 @@ void main(){
     printf("##### ESTADO INICIAL #####\n%d pessoas,\t%d comendo,\t%d esperando.\n", NUM_PESSOAS, comendo, esperando);
 
     for(i=0;i<NUM_PESSOAS;i++)
-        pthread_create(&pessoas[i],0,sushi_bar,&id_pessoas[i]);
+        pthread_create(&pessoas[i], 0, sushi_bar, &id_pessoas[i]);
 
     while(TRUE);
-
 }
