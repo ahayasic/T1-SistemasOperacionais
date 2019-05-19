@@ -66,6 +66,8 @@ int main()
     for(i=0;i<NUM_PESSOAS;i++)
         id_pessoas[i] = i;
 
+    printf("##### ESTADO INICIAL #####\n%d pessoas,\t%d comendo,\t%d esperando.\n", NUM_PESSOAS, comendo, esperando);
+
     for(i=0;i<NUM_PESSOAS;i++)
         pthread_create(&pessoas[i], 0, sushi_bar, &id_pessoas[i]);
 
