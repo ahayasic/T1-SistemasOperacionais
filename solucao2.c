@@ -13,8 +13,6 @@ pthread_mutex_t mutex;
 
 void *sushi_bar(void *identificador)
 {
-    int i, n;
-
     while(TRUE) {
         pthread_mutex_lock(&mutex);
         if(deve_esperar) {
@@ -50,7 +48,7 @@ void *sushi_bar(void *identificador)
     }
 }
 
-void main()
+int main()
 {
     int i;
     int id_pessoas[NUM_PESSOAS];
